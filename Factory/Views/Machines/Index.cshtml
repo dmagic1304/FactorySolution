@@ -14,6 +14,8 @@
 <ul>
   @foreach(Machine machine in Model)
   {
-    <li>machine.Name</li>
+    <li>@machine.Name</li>
   }
 </ul>
+
+<p>@Html.ActionLink("Add a new machine", "Create")</p>
