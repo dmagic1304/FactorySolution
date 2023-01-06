@@ -10,5 +10,21 @@
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
 
+@if(@Model.JointEntities.Count == 0)
+{
+  <p>No engineers licenced to service this machine yet!</p>
+}
+else
+{
+  <h4>Following engineers have a license to service this machine:</h4>
+  <ul>
+    @foreach(EngineerMachine join in Model.JointEntities)
+    {
+      <li>Engineer: @join.Engineer.Name</li>
+      
+    }
+  </ul>
+}
+
 
 <p>@Html.ActionLink("Add an Engineer", "AddEngineer", new { id = Model.MachineId })</p>

@@ -45,7 +45,10 @@ namespace Factory.Controllers
     
      public ActionResult Details (int id)
     {
-      Machine thisMachine = _db.Machines.FirstOrDefault( machine => machine.MachineId == id);
+      Machine thisMachine = _db.Machines
+                                      .Include(machine => machine.JointEntities)
+                                      .ThenInclude(join => join.Engineer)
+                                      .FirstOrDefault( machine => machine.MachineId == id);
       return View(thisMachine);
     }
 
@@ -57,10 +60,10 @@ namespace Factory.Controllers
     }
 
     [HttpPost]
-    public ActionResult AddEngineer(Machine machine, int engineereId)
+    public ActionResult AddEngineer(Machine machine, int engineerId)
     {      
       
-        _db.EngineerMachines.Add(new EngineerMachine() { EngineerId = engineereId, MachineId = machine.MachineId });
+        _db.EngineerMachines.Add(new EngineerMachine() { EngineerId = engineerId, MachineId = machine.MachineId });
         _db.SaveChanges();
       
       return RedirectToAction("Details", new { id = machine.MachineId });
