@@ -34,6 +34,12 @@ namespace Factory.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    public ActionResult Details (int id)
+    {
+      Engineer thisEngineer = _db.Engineers.FirstOrDefault( engineer => engineer.EngineerId == id);
+      return View(thisEngineer);
+    }
     
   }
 }
