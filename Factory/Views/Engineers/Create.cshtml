@@ -12,3 +12,5 @@
   @Html.TextBoxFor(model => model.Name)
   <input type="submit" value="Add new engineer" />
 }
+
+<p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
