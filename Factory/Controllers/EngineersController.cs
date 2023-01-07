@@ -52,6 +52,21 @@ namespace Factory.Controllers
                                     .FirstOrDefault( engineer => engineer.EngineerId == id);
       return View(thisEngineer);
     }
+
+    public ActionResult Delete(int id)
+    {
+      Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      return View(thisEngineer);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      Engineer thisEngineer = _db.Engineers.FirstOrDefault(engineer => engineer.EngineerId == id);
+      _db.Engineers.Remove(thisEngineer);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
     
     public ActionResult AddMachine(int id)
     {
@@ -64,7 +79,7 @@ namespace Factory.Controllers
     public ActionResult AddMachine(Engineer engineer, int machineId)
     {      
       #nullable enable
-      EngineerMachine? joinEntity = _db.EngineerMachine.FirstOrDefault(join => (join.MachineId == machineId && join.EngineerId == engineer.EngineerId));
+      EngineerMachine? joinEntity = _db.EngineerMachines.FirstOrDefault(join => (join.MachineId == machineId && join.EngineerId == engineer.EngineerId));
       #nullable disable
       if (joinEntity == null && machineId != 0)
       {
