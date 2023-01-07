@@ -62,9 +62,14 @@ namespace Factory.Controllers
     [HttpPost]
     public ActionResult AddEngineer(Machine machine, int engineerId)
     {      
-      
+      #nullable enable
+      EngineerMachine? joinEntity = _db.EngineerMachine.FirstOrDefault(join => (join.EngineerId == engineerId && join.MachineId == machine.MachineId));
+      #nullable disable
+      if (joinEntity == null && engineerId != 0)
+      {
         _db.EngineerMachines.Add(new EngineerMachine() { EngineerId = engineerId, MachineId = machine.MachineId });
-        _db.SaveChanges();
+        _db.SaveChanges();               
+      }
       
       return RedirectToAction("Details", new { id = machine.MachineId });
     }  
