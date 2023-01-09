@@ -4,18 +4,25 @@
 
 @model Factory.Models.Engineer
 
-<h2>Add a machine</h2>
-
-<h4>Add a machine to this engineer: @Html.DisplayFor(model => model.Name)</h4>
-
-@using (Html.BeginForm())
+@if(ViewBag.test.Count == 0)
 {
-    @Html.HiddenFor(model => model.EngineerId)
-
-    @Html.Label("Select a machine")
-    @Html.DropDownList("MachineId")
-
-    <input type="submit" value="Save" />
+  <h2>There are no machines yet, please add a machine first!</h2>
+  <p>@Html.ActionLink("Add am machine", "Create", "Machines")</p>
 }
+else
+{
+  <h2>Add a machine</h2>
 
+  <h4>Add a machine to this engineer: @Html.DisplayFor(model => model.Name)</h4>
+
+  @using (Html.BeginForm())
+  {
+      @Html.HiddenFor(model => model.EngineerId)
+
+      @Html.Label("Select a machine")
+      @Html.DropDownList("MachineId")
+
+      <input type="submit" value="Save" />
+  }
+}
 <p>@Html.ActionLink("Back to list", "Index")</p>
