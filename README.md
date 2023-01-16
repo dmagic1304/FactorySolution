@@ -15,6 +15,7 @@
 - MySQL
 - MySQL Workbench
 - EF Core
+- Dotnet EF 6.0.1
 
 ## Description
 
@@ -32,7 +33,9 @@ echo '{
       "DefaultConnection": "Server=localhost;Port=3306;database=dominik_magic;uid=root;pwd=[YOURPASSWORD];"
     }
   }' > appsettings.json
-```  
+```
+* _Next, in the same "root/Factory" directory, run the following command: "dotnet ef database update" to create the database_
+
 
 * _To run the application, make sure you are in  "root/Facory" folder using your terminal and once there, run "dotnet run" command in the terminal. Once you see in your terminal that the server is running, go to the following URL using your internet browser http://localhost:5000_
 
